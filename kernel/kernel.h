@@ -88,3 +88,5 @@ struct process {
 #define USER_BASE 0x1000000
 
 #define SCAUSE_ECALL 8
+
+paddr_t alloc_pages(uint32_t n);

@@ -1,5 +1,6 @@
 #include "kernel.h"
 #include "common.h"
+#include "virtio.h"
 
 typedef unsigned char uint8_t;
 typedef unsigned int uint32_t;
@@ -273,6 +274,8 @@ struct process* create_process(const void* image, size_t image_size) {
         map_page(page_table, paddr, paddr, PAGE_R | PAGE_W | PAGE_X);
     }
 
+    map_page(page_table, VIRTIO_BLK_PADDR, VIRTIO_BLK_PADDR, PAGE_R | PAGE_W);
+
     for (uint32_t off = 0; off < image_size; off += PAGE_SIZE) {
         paddr_t page = alloc_pages(1);
 
@@ -366,6 +369,8 @@ void kernel_main(void) {
     printf("hello world from kernel space\n");
 
     WRITE_CSR(stvec, (uint32_t) kernel_entry);
+
+    virtio_init();
 
     idle_proc = create_process(NULL, 0);
     idle_proc->pid = -1;

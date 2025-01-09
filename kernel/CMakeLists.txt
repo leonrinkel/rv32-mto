@@ -42,7 +42,12 @@ set_property(
         ${CMAKE_CURRENT_BINARY_DIR}/shell.bin.o
 )
 
-add_executable(kernel kernel.c $<TARGET_OBJECTS:asdf>)
+add_executable(
+    kernel
+        kernel.c
+        virtio.c
+        $<TARGET_OBJECTS:asdf>
+)
 target_include_directories(kernel PRIVATE .)
 target_link_libraries(kernel common)
 target_link_options(
