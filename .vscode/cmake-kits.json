@@ -1,0 +1,6 @@
+[
+    {
+        "name": "RISCV32",
+        "toolchainFile": "${workspaceFolder}/RISCV32.cmake"
+    }
+]

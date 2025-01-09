@@ -1,4 +1,1 @@
-*.elf
-*.map
-*.bin
-*.o
+/build

@@ -9,8 +9,8 @@ extern char __kernel_base[];
 extern char __bss_start[], __bss_end[];
 extern char __stack_top[];
 extern char __ram_start[], __ram_end[];
-extern char _binary_shell_bin_start[];
-extern char _binary_shell_bin_size[];
+extern char _shell_bin_start[];
+extern char _shell_bin_size[];
 
 struct sbiret sbicall(
     long arg0, long arg1, long arg2, long arg3,
@@ -371,7 +371,7 @@ void kernel_main(void) {
     idle_proc->pid = -1;
     current_proc = idle_proc;
 
-    create_process(_binary_shell_bin_start, (size_t) _binary_shell_bin_size);
+    create_process(_shell_bin_start, (size_t) _shell_bin_size);
 
     yield();
     PANIC("switched to idle process");
